@@ -78,12 +78,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         //补全密码字段，需要进行md5加密，默认密码123456
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         employee.setStatus(StatusConstant.ENABLE);
-//        employee.setCreateTime(LocalDateTime.now());
-//        employee.setUpdateTime(LocalDateTime.now());
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
         //TODO:补全创建和更新人的id
         //从ThreadLocal中获取出登陆人id
-//        employee.setCreateUser(BaseContext.getCurrentId());
-//        employee.setUpdateUser(BaseContext.getCurrentId());
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
         //2.调用mapper方法，将员工对象存入employee表中
         employeeMapper.insert(employee);
     }
@@ -135,9 +135,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public void update(Employee employee) {
-        //使用公共字段填充逻辑---AOP
-//        employee.setUpdateTime(LocalDateTime.now());
-//        employee.setUpdateUser(BaseContext.getCurrentId());
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 
