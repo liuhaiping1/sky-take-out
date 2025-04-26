@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.ShoppingCartMapper">
+<!--    新增商品进入购物车-->
+    <insert id="insert">
+        insert into shopping_cart(name, image, user_id, dish_id, setmeal_id, dish_flavor, amount, create_time)
+        values (#{name},#{image},#{userId},#{dishId},#{setmealId},#{dishFlavor},#{amount},#{createTime})
+    </insert>
+
+<!--    根据id更新购物车数量-->
+    <update id="updateNumber">
+        update shopping_cart set number = #{number} where id = #{id}
+    </update>
+
+<!--    单个删除购物车中的商品-->
+    <delete id="deleteCart">
+        delete from shopping_cart
+        <where>
+            <if test="setmealId != null">
+                setmeal_id = #{setmealId}
+            </if>
+            <if test="dishId != null">
+                and dish_id = #{dishId}
+            </if>
+            <if test="dishFlavor != null">
+                and dish_flavor = #{dishFlavor}
+            </if>
+        </where>
+    </delete>
+
+<!--    清空购物车-->
+    <delete id="cleanCart">
+        delete from shopping_cart where user_id = #{userId}
+    </delete>
+    <!--    根据条件查询购物车-->
+    <select id="selectBy" resultType="com.sky.entity.ShoppingCart">
+        select id, name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time from shopping_cart
+        <where>
+            <if test="dishId != null">
+                dish_id = #{dishId}
+            </if>
+            <if test="dishFlavor != null">
+                and dish_flavor = #{dishFlavor}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="setmealId != null">
+                and setmeal_id = #{setmealId}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+<!--    根据用户id查询购物车-->
+    <select id="listCart" resultType="com.sky.entity.ShoppingCart">
+        select id, name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time from  shopping_cart where user_id = #{userId}
+    </select>
+</mapper>
