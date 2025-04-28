@@ -55,4 +55,22 @@
     <select id="listCart" resultType="com.sky.entity.ShoppingCart">
         select id, name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time from  shopping_cart where user_id = #{userId}
     </select>
+    <select id="list" resultType="com.sky.entity.ShoppingCart">
+        select id, name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time from shopping_cart
+        <where>
+            <if test="dishId != null">
+                dish_id = #{dishId}
+            </if>
+            <if test="dishFlavor != null">
+                and dish_flavor = #{dishFlavor}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="setmealId != null">
+                and setmeal_id = #{setmealId}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
 </mapper>

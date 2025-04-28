@@ -45,4 +45,11 @@ public interface ShoppingCartMapper {
      * @param userId
      */
     void cleanCart(Long userId);
+
+    /**
+     * 查询购物车
+     * @param shoppingCart
+     * @return
+     */
+    List<ShoppingCart> list(ShoppingCart shoppingCart);
 }
