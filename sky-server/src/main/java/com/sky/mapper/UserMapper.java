@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Map;
+
 public interface UserMapper {
 //    @Select("select * from user where openid = #{openid}")
     User selectByOpenid(String openid);
@@ -14,4 +16,11 @@ public interface UserMapper {
     void insert(User user);
 
     User getById(Long userId);
+
+    /**
+     * 根据条件统计用户数量
+     * @param map
+     * @return
+     */
+    Integer countByMap(Map map);
 }

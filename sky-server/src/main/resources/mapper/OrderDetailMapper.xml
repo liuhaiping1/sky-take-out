@@ -13,4 +13,17 @@
     <select id="getByOrderId" resultType="com.sky.entity.OrderDetail">
         select * from order_detail where order_id = #{orderId}
     </select>
+    <select id="selectTop10NameById" resultType="java.lang.String">
+        select name from order_detail where order_id = #{orderId}
+    </select>
+<!--    查询Top10-->
+    <select id="selectTop10Name" resultType="java.util.Map">
+        select od.name,sum(od.number) sumNum
+        from order_detail od,orders o where order_id = o.id
+            and status = 5
+            and o.order_time between #{beginTime} and #{endTime}
+            group by od.name order by sumNum desc  limit 0,10
+    </select>
+
+
 </mapper>

@@ -4,8 +4,10 @@ import com.github.pagehelper.Page;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface OrdersMapper {
     /**
@@ -60,4 +62,20 @@ public interface OrdersMapper {
      * @param orderTime
      */
     List<Orders> selectByStatusAndOrderTime(Integer status, LocalDateTime orderTime);
+
+    /**
+     * 根据动态条件统计订单营业额
+     * @param map
+     * @return
+     */
+    Double sumByMap(Map map);
+
+    /**
+     * 根据动态条件统计每天的新增用户数量
+     * @param map
+     * @return
+     */
+    Integer countByMap(Map map);
+
+
 }

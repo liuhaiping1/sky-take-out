@@ -96,4 +96,24 @@
     <select id="selectByStatusAndOrderTime" resultType="com.sky.entity.Orders">
         select * from orders where status = #{status} and order_time &lt;= #{orderTime}
     </select>
+<!--    统计对应日期的营业额-->
+    <select id="sumByMap" resultType="java.lang.Double">
+        select sum(amount) from orders where status = #{status} and order_time between #{beginTime} and #{endTime}
+    </select>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(*) from orders
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="beginTime != null">
+                and order_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and order_time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+
+
 </mapper>
