@@ -4,6 +4,9 @@ import com.github.pagehelper.Page;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public interface OrdersMapper {
     /**
      * 插入订单数据
@@ -50,4 +53,11 @@ public interface OrdersMapper {
      * @return
      */
     Integer countStatus(Integer toBeConfirmed);
+
+    /**
+     * 根据状态和下单时间查询订单
+     * @param status
+     * @param orderTime
+     */
+    List<Orders> selectByStatusAndOrderTime(Integer status, LocalDateTime orderTime);
 }

@@ -5,12 +5,14 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableCaching //开启缓存注解功能
 @MapperScan("com.sky.mapper")//扫描指定mapper，mapper层可以不加@Mapper注解
 @SpringBootApplication
 @EnableTransactionManagement //开启注解方式的事务管理
+@EnableScheduling //开启任务调度
 @Slf4j
 public class SkyApplication {
     public static void main(String[] args) {
